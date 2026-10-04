@@ -1,9 +1,9 @@
-# Project: Expense Tracker - Installment 2
+# Project: Expense Tracker - Installment 3
 # Author: Bryan Kyle Dimpal
-# Description: Interactively prompts for user input, processes expenses, and prints a formatted summary.
+# Description: Calculates running subtotal, tax rate, grand total, budget status, and remaining budget.
 
 print("=" * 40)
-print("\t" + " " * 5 + "EXPENSE TRACKER")
+print("\t     EXPENSE TRACKER")
 print("\tKnow where your money goes.")
 print("=" * 40)
 
@@ -16,21 +16,35 @@ print("\t[4] Exit\t\t\t(coming soon)\n")
 name = input("What's your name? ")
 print(f"Welcome, {name}! Let's log two expenses.\n")
 
+subtotal = 0.0
+
 item1 = input("First expense? ")
 amount1 = float(input("Amount? "))
+subtotal += amount1
 
 item2 = input("Second expense? ")
 amount2 = float(input("Amount? "))
+subtotal += amount2
 
-total = amount1 + amount2
-average = total / 2
+average = subtotal / 2
 
-print("")
-print("-" * 40)
+tax_percent = float(input("Tax rate %? "))
+tax = subtotal * (tax_percent / 100)
+total = subtotal + tax
+
+budget = float(input("Your budget? "))
+over_budget = total > budget
+left = budget - total
+
+print("\n" + "-" * 40)
 print("SUMMARY")
-print(f" - {item1}:\t\t${amount1}")
-print(f" - {item2}:\t\t${amount2}")
-print(f"Total spent:\t\t${total}")
-print(f"Average:\t\t${average}")
+print(f"  - {item1}:\t${amount1}")
+print(f"  - {item2}:\t${amount2}")
+print(f"Subtotal:\t${subtotal}")
+print(f"Average:\t${average}")
+print(f"Tax ({tax_percent}%):\t${tax}")
+print(f"Grand total:\t${total}")
+print(f"Over budget?\t{over_budget}")
+print(f"Left in budget:\t${left}")
 print("-" * 40)
-print("Made by: Bryan Kyle Dimpal  |  Installment 2")
+print("Made by: Bryan Kyle Dimpal  |  Installment 3")
